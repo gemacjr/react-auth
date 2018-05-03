@@ -27,11 +27,12 @@ class Auth {
     }
 
     logout = () => {
-
+        ['access_token', 'expires_at'].forEach(item => localStorage.removeItem(item));
+        history.replace('/');
     }
 
     isAuthenticated() {
-        return false;
+        return new Date().getTime() < +localStorage.getItem('expires_at');
     }
 }
 
